@@ -10,22 +10,50 @@ Currently Rental bikes are introduced in many urban cities for the enhancement o
 
 The goal of the company Seoul Bike is providing the city with a stable supply of rental bikes. It becomes a major concern to keep users satisfied. The crucial part is the prediction of bike count rents at each hour for a stable supply of rental bikes. We can suppose that this study could be reported to the company 'Seoul Bikes'. We think it could help them knowing if yes or not they have to supply bike stations in the city, in order to keep the customers.
 
-**Applied Models:**
+**Attribute Information:**
 
-Linear Regression : R2 Score is 56.31%
+●	Date : The day of the day, during 365 days, type : str
+●	Rented Bike Count : Number of rented bikes per hour which is the target, type : int
+●	Hour: The hour of the day, type : int
+●	Temperature(°C): Temperature per hour, type : Float
+●	Humidity(%): Humidity in the air in %, type : int
+●	Wind speed (m/s) : Speed of the wind in m/s, type : Float
+●	Visibility (10m): Visibility in m, type : int
+●	Dew point temperature(°C): Temperature at the beginning of the day, type : Float
+●	Solar Radiation (MJ/m2): Sun contribution, type : Float
+●	Rainfall(mm): Amount of rain in mm, type : Float
+●	Snowfall (cm): Amount of snow in cm, type : Float
+●	Seasons: Season of the year, type : str
+●	Holiday: If it is holiday period, type: str
+●	Functioning Day: If it is a Functioning Day, type : str
 
-Lasso Regression : R2 Score is 56.31%
+**Model Implementation and Evaluation:**
 
-Ridge Regression : R2 Score is 56.31%
+Model Name                           | R2 Score | MAE       | MSE        | RMSE     | 
+----------                           |----------|-----------|------------|----------|
+Logistic Regression                  | 0.56     | 308.72    | 159536.57  | 399.42 | 
+Lasso Regression                     | 0.56     | 308.71    | 159539.52  | 399.42   | 
+Ridge Regression                     | 0.56     | 308.72    | 159535.60  | 399.41   | 
+Elastic Net Regression               | 0.53     | 315.45    | 171410.07  | 414.01   | 
+Decision Tree Regression             | 0.67     | 247.30    | 118143.64  | 343.72   |
+XGBoost Regressor                    | 0.83     | 165.26    | 60720.72   | 246.41   |
+Random Forest Regressor              | 0.86     | 139.89    | 50467.60   | 224.64   |
 
-Elastic Net Regression : R2 Score is 53.05%
-
-Decision Tree Regression : R2 Score is 67.64%
-
-XGBoost Regressor : R2 Score is 83.37%
-
-Random Forest Regressor : R2 Score is 86.18%
-
+**Conclusion:**
 **Hperparameter Tuning:**
 
-R2 score of random forest model after hyperparameter tuning is 86.26% which can be said to be good for this dataset.
+After Hyperparameter tuning on Random Forest model using Random Search CV we can see the slight change in the accuracy i. e.
+
+MAE is increased from 139.89 to 142.25
+
+MSE is reduced from 50467.60 to 50153.49
+
+RMSE is reduced from 224.64 to 223.94
+
+R2-Score is increased from 0.8617 to 0.8626
+
+This results can said to be good for this dataset.
+
+**Feature Importance:**
+![image](https://user-images.githubusercontent.com/89305804/202852112-25d4c18e-ad43-467c-ba1f-39ac69e38a21.png)
+Based on this analysis, we choose to built a Random Forest model to predict the number of bike rents. We achieved an R2 accuracy of 86.26% based on 3-folds CV. Finally, it was found that hour and temperature are the most determining feature predictors.
